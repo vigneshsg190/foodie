@@ -1,0 +1,33 @@
+{% extends "dummycart.html" %}
+{% load static %}
+{% block content %}
+<form action="order/{{data1.prid}}" method="post">
+    {% csrf_token %}
+    <br> 
+    <br> 
+    <table width="180%"  id="alignment" >
+            <tr>
+                <th><h1>Id.No</h1></th>
+                <th><h1>Food Item</h1></th>
+                <th><h1>Quantity</h1></th>
+                <th><h1>Price</h1></th> 
+                <th><h1>Order On</h1></th> 
+                <th><h1>Status</h1></th>
+                </tr>
+            {% for data in data %}	
+                <tr>
+                <td><h3>{{data.fiordid}}</h3></td>
+                <td><h3>{{data.prid.product_name}}</h3></td>
+                <td><h3>{{data.product_qty}}</h3></td>
+                <td><h3>{{data.total}}</h3></td>
+                <td><h3>{{data.created_at}}</h3></td>
+                <!--<td><h3>{{data.status|yesno:'DELIVERED,PENDING'}}</h3></td>-->
+                {% if data.status %}
+            <td><small class="badge badge-success">COMPLETED</small> </td>
+            {%else%} 
+            <td><small class="badge badge-warning">PENDING</small></td>
+            {% endif %}
+            </tr>
+            {% endfor %}
+            <td>  
+{% endblock %} 
